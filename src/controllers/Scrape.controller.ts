@@ -3,6 +3,8 @@ import puppeteer from "puppeteer";
 import cheerio from "cheerio";
 import fs from "fs";
 import path from "path";
+import ScrapeRequest from "../contracts/ScrapeRequest.interface";
+import ScrapeResponse from "../contracts/ScrapeResponse.interface";
 
 class ScrapeController {
   public name: string;
@@ -14,7 +16,7 @@ class ScrapeController {
     this.intializeRoutes();
   }
 
-  public async GetHtml(url: string): Promise<string> {
+  private async GetHtml(url: string): Promise<string> {
     try {
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
@@ -32,13 +34,10 @@ class ScrapeController {
       throw new Error(`Axios failed ${error}`);
     }
   }
-  private WriteHtml(html: string) {
-    const fileName = "../../tmp/html";
-    fs.writeFileSync(path.join(__dirname, fileName), html);
-  }
-  public async ScrapeText(selector: string, url: string): Promise<string> {
+
+  private async ScrapeText(selector: string, url: string): Promise<string> {
     const html: string = await this.GetHtml(url);
-    this.WriteHtml(html);
+
     try {
       const $ = cheerio.load(html);
       const result: string = $(selector).text();
@@ -49,11 +48,11 @@ class ScrapeController {
     }
   }
 
-  public intializeRoutes() {
+  private intializeRoutes() {
     this.router.post(this.path, this.getScrape);
   }
 
-  public ValidateRequest(request: express.Request): boolean {
+  private ValidateRequest(request: express.Request): boolean {
     const url = request.body.url,
       selector = request.body.selector;
     if (!selector || !url) {
@@ -76,11 +75,15 @@ class ScrapeController {
     }
     try {
       result = await this.ScrapeText(selector, url);
-      response.send({
+      const data = <ScrapeResponse>{
+        date: new Date(),
         message: "success",
+        result,
+        selector,
         status: 200,
-        result: result,
-      });
+        url,
+      };
+      response.send(data);
     } catch (error) {
       response.send({ message: "Error", status: 500, error });
     }
