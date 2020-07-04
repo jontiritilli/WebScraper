@@ -2,11 +2,12 @@ import ScrapeRequest from "./ScrapeRequest.interface";
 
 interface ScrapeResponse {
   date: Date;
-  message: string;
-  result: string;
-  selector: string;
+  success: boolean;
+  result?: string;
+  selector?: string;
   status: number;
-  url: string;
+  url?: string;
+  error?: string;
 }
 
 export default ScrapeResponse;
