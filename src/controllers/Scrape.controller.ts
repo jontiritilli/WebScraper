@@ -24,11 +24,11 @@ class ScrapeController {
     response: express.Response
   ) {
     const url = request.body.url;
-    const selector = request.body.selector;
+    const selectors = request.body.selectors;
 
     const scrapeRequest: ScrapeRequest = <ScrapeRequest>{
       url,
-      selector,
+      selectors,
     };
 
     const requestValidator = new RequestValidator();
@@ -44,13 +44,13 @@ class ScrapeController {
 
     try {
       const scraper = new Scraper();
-      const result: string = await scraper.Scrape(scrapeRequest);
+      const results: string[] = await scraper.Scrape(scrapeRequest);
       response.send(<ScrapeResponse>{
         date: new Date(),
         success: true,
         status: 200,
-        result,
-        selector,
+        results,
+        selectors,
         url,
       });
     } catch (error) {

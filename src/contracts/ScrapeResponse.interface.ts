@@ -3,8 +3,8 @@ import ScrapeRequest from "./ScrapeRequest.interface";
 interface ScrapeResponse {
   date: Date;
   success: boolean;
-  result?: string;
-  selector?: string;
+  result?: string[];
+  selectors?: string[];
   status: number;
   url?: string;
   error?: string;

@@ -1,6 +1,6 @@
 interface ScrapeRequest {
   url: string;
-  selector: string;
+  selectors: string[];
 }
 
 export default ScrapeRequest;
