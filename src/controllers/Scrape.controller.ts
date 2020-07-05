@@ -15,16 +15,16 @@ class ScrapeController {
   }
 
   private intializeRoutes() {
-    this.router.post(this.path, this.getScrape);
+    this.router.post(this.path, this.postScrape);
   }
 
   // route work happens here
-  private async getScrape(
+  private async postScrape(
     request: express.Request,
     response: express.Response
   ) {
     const url = request.body.url;
-    const selectors = request.body.selectors;
+    const selectors = request.body["selectors[]"];
 
     const scrapeRequest: ScrapeRequest = <ScrapeRequest>{
       url,

@@ -1,0 +1,42 @@
+<div class="container">
+  <h1 class="display-4 text-center">Welcome to Scrapey.io!</h1>
+  <h3>Enter a URL, and paste in one or more css selectors to get started</h3>
+  <div class="row">
+    <div class="col col-sm-12">
+      <div class="request">
+        <div class="col col-sm-12">
+          <input type="text" name="url" id="txtUrl" placeholder="https://example.com" />
+        </div>
+        <div class="col col-sm-12">
+          <div class="requestRows">
+            <span class="rowTitle">Selectors:</span>
+            <ul>
+              <li class="requestRow">
+                <input type="text" name="selector" class="txtSelector" placeholder="div.entry > h1" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row col col-sm-12 justify-content-center">
+          <a id="addRowBtn" class="addRow"><i class="fa fa-plus-square" aria-hidden="true"></i>
+            Add Row
+          </a>
+        </div>
+        <div class="row">
+          <div class="col col-sm-12">
+            <button name="submitScrape" id="submitScrape" class="btn btn-success" role="button">
+              Scrape
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div id="results" class="results">
+        <ul id="resultsList"></ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html,
+.wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.body-wrapper {
+  flex: 2;
+}
+
+.body-wrapper .request {
+  text-align: center;
+}
+
+.body-wrapper .request .requestRows {
+  display: flex;
+  justify-content: center;
+}
+
+.body-wrapper .request .requestRows .requestRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.body-wrapper .request .requestRows .rowTitle {
+  position: absolute;
+  left: 15%;
+}
+
+.body-wrapper .request .requestRows ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+}
+
+.body-wrapper .request .requestRows ul li .removeRowBtn {
+  color: #dc3545;
+  padding-left: 10px;
+  position: absolute;
+  right: -25px;
+}
+.body-wrapper .request #addRowBtn,
+.body-wrapper .request .requestRows ul li .removeRowBtn {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.body-wrapper .request #addRowBtn {
+  color: #007bff;
+}
+
+.footer-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 15px;
+}
