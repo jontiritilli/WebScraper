@@ -24,21 +24,20 @@ class ScrapeController {
     response: express.Response
   ) {
     const url = request.body.url;
-    const selectors = request.body["selectors[]"];
+    const selectors = request.body.selectors;
 
     const scrapeRequest: ScrapeRequest = <ScrapeRequest>{
       url,
       selectors,
     };
 
-    const requestValidator = new RequestValidator();
-
-    const isValidRequest: boolean = requestValidator.Validate(scrapeRequest);
-
-    if (!isValidRequest) {
+    try {
+      const requestValidator = new RequestValidator();
+      requestValidator.Validate(scrapeRequest);
+    } catch (error) {
       response.status(400).send(<ScrapeResponse>{
         date: new Date(),
-        error: `selector and url params must be provided in your request`,
+        error: error.message,
       });
     }
 

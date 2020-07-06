@@ -8,15 +8,15 @@ class HtmlProvider {
 
       await page.goto(url);
 
-      const bodyHandle = await page.$("body");
+      const htmlHandle = await page.$("html");
 
-      const html = await page.evaluate((body) => body.innerHTML, bodyHandle);
+      const html = await page.evaluate((html) => html.innerHTML, htmlHandle);
 
-      await bodyHandle?.dispose();
+      await htmlHandle?.dispose();
 
       return html;
     } catch (error) {
-      throw new Error(`Axios failed ${error}`);
+      throw new Error(`HtmlProvider failed ${error}`);
     }
   }
 }

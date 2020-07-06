@@ -80,9 +80,14 @@ function getScrapeResponse(request, callback) {
   $.ajax({
     method: "POST",
     url: "/scrape",
-    data: request,
+    contentType: "application/json",
+    data: JSON.stringify(request),
     success: (response) => {
-      callback(response);
+      if (response.success) {
+        callback(response);
+      } else {
+        callback(null, response.error);
+      }
     },
     error: (error) => {
       callback(null, error);
@@ -91,7 +96,7 @@ function getScrapeResponse(request, callback) {
 }
 
 function renderResults(results) {
-  const ul = $("#resultsList");
+  const ul = document.getElementById("resultsList");
   results.forEach((resultText) => {
     const li = document.createElement("li");
 
